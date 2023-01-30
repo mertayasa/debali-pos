@@ -25,7 +25,9 @@ Route::get('/', function () {
 
 // Auth::routes();
 Route::middleware(['auth'])->group(function () {
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::group(['prefix' => 'home', 'as' => 'home.'], function () {
+        Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
+    });
     
     Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
         Route::get('edit', [UserController::class, 'editProfile'])->name('edit');

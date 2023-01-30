@@ -24,8 +24,25 @@
         }
 
         .navbar-nav .nav-link.active {
-            color: rgb(255 2 37);
+            color: #ff0176;
             font-weight: 700;
+        }
+        button {
+            font-weight: 700 !important;
+        }
+        .bg-danger {
+            background-color: #ff0176;
+        }
+        .text-danger {
+            color: #ff0176;
+        }
+        .btn-danger {
+            background-color: #ff0176;
+            border-color: #ff0176;
+        }
+        .btn-danger:hover {
+            background-color: #d6146f;
+            border-color: #d6146f;
         }
     </style>
 
