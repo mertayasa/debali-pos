@@ -8,7 +8,7 @@
                     <span>Expense</span>
                 </div>
                 <div class="col text-end">
-                    <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#formModal" x-on:click="$store.expense.create($event)">Create New</button>
+                    <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#formModal" x-on:click="$store.expense.create($event)">Create New</button>
                 </div>
             </div>
         </div>

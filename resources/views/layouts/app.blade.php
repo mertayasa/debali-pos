@@ -27,6 +27,10 @@
             color: #ff0176;
             font-weight: 700;
         }
+        .nav-link:hover {
+            color: #ff0176;
+            font-weight: 700;
+        }
         button {
             font-weight: 700 !important;
         }
@@ -43,6 +47,62 @@
         .btn-danger:hover {
             background-color: #d6146f;
             border-color: #d6146f;
+        }
+
+        .bg-info {
+            background-color: #98DFF5;
+        }
+        .text-info {
+            color: #98DFF5;
+        }
+        .btn-info {
+            background-color: #98DFF5;
+            border-color: #98DFF5;
+        }
+        .btn-info:hover {
+            background-color: #94cddf;
+            border-color: #94cddf;
+        }
+
+        .page-link{
+            color: black;
+        }
+        
+        .page-link.active, .active > .page-link{
+            background-color: #98DFF5;
+            border-color: #98DFF5;
+            color: black;
+        }
+
+        .bg-warning {
+            background-color: #FAF953;
+        }
+        .text-warning {
+            color: #FAF953;
+        }
+        .btn-warning {
+            background-color: #FAF953;
+            border-color: #FAF953;
+        }
+        .btn-warning:hover {
+            background-color: #e9e974;
+            border-color: #e9e974;
+        }
+        .bg-success {
+            background-color: #93F29F;
+        }
+        .text-success {
+            color: #93F29F;
+        }
+        .btn-success {
+            color: black;
+            background-color: #93F29F;
+            border-color: #93F29F;
+        }
+        .btn-success:hover {
+            color: black;
+            background-color: #9de0a6;
+            border-color: #9de0a6;
         }
     </style>
 
