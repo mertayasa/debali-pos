@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\ProductCategoryDataTable;
+use App\Http\Requests\ProductCategoryRequest;
 use App\Models\ProductCategory;
 use Exception;
 use Illuminate\Http\Request;
@@ -21,10 +22,27 @@ class ProductCategoryController extends Controller
         return ProductCategoryDataTable::set($product_categories);
     }
 
-    public function store(Request $request)
+    public function store(ProductCategoryRequest $request)
     {
         try{
-            ProductCategory::create($request->all());
+            if(str_contains($request->name, ',')){
+                $raw_names = explode(',', $request->name);
+                $names = [];
+
+                foreach ($raw_names as $key => $name) {
+                    if($name){
+                        array_push($names, [
+                            'name' => $name,
+                            'created_at' => now(),
+                            'updated_at' => now(),
+                        ]);
+                    }
+                }
+
+                ProductCategory::insert($names);
+            }else{
+                ProductCategory::create($request->validated());
+            }
         }catch(Exception $e){
             Log::error($e->getMessage());
             Log::error($e->getTraceAsString());
@@ -54,10 +72,10 @@ class ProductCategoryController extends Controller
         ]);
     }
 
-    public function update(Request $request, ProductCategory $productCategory)
+    public function update(ProductCategoryRequest $request, ProductCategory $productCategory)
     {
         try{
-            $productCategory->update($request->all());
+            $productCategory->update($request->validated());
         }catch(Exception $e){
             Log::error($e->getMessage());
             Log::error($e->getTraceAsString());

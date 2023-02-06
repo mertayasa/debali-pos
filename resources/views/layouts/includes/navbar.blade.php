@@ -27,13 +27,14 @@
                         <a class="nav-link {{ isActive('expense') }}" href="{{ route('expense.index') }}">Expense</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle fs-5 {{ isActive(['product-categories', 'expense-categories']) }}" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        <a id="navbarDropdown" class="nav-link {{ isActive(['product-category', 'expense-category', 'supplier']) }} dropdown-toggle fs-5 {{ isActive(['product-categories', 'expense-categories']) }}" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             Master Data
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item fs-5" href="{{ route('product_category.index') }}">Prduct Cat</a>
                             <a class="dropdown-item fs-5" href="{{ route('expense_category.index') }}">Expense Cat</a>
+                            <a class="dropdown-item fs-5" href="{{ route('supplier.index') }}">Supplier</a>
                         </div>
                     </li>
                 </ul>

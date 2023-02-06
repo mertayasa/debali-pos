@@ -254,8 +254,6 @@
                         this.flashClass = 'bg-danger'
                         break
                 }
-
-                console.log('asdssad');
                 
                 if (typeof message === 'object') {
                     this.flashData = message

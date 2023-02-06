@@ -48,7 +48,7 @@
                 responsive: true,
                 ajax: url,
                 // searching: false,
-                // lengthChange: false,
+                lengthChange: false,
                 columns: columns,
                 order: [
                     [1, "DESC"]

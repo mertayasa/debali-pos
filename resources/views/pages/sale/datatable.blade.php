@@ -2,13 +2,13 @@
     <link rel="stylesheet" href="{{ asset('plugins/datatables/datatables.min.css') }}">
 @endpush
 
-<table class="table table-hover " width="100%" id="expense_category_dataTable"></table>
+<table class="table table-hover " width="100%" id="supplier_dataTable"></table>
 
 @push('scripts')
     <script src="{{ asset('plugins/datatables/datatables.min.js') }}"></script>
     <script>
         let table
-        let url = "{{ route('expense_category.datatable') }}"
+        let url = "{{ route('supplier.datatable') }}"
         datatable(url)
 
         function datatable(url) {
@@ -27,9 +27,37 @@
                     searchable: false,
                 },
                 {
-                    data: 'name',
-                    name: 'name',
-                    title: 'Category Name',
+                    data: 'customer.name',
+                    name: 'customer.name',
+                    title: 'Name',
+                    orderable: false,
+                    className: "text-start align-middle",
+                },
+                {
+                    data: 'total_discount',
+                    name: 'total_discount',
+                    title: 'Discount',
+                    orderable: false,
+                    className: "text-start align-middle",
+                },
+                {
+                    data: 'total',
+                    name: 'total',
+                    title: 'Total',
+                    orderable: false,
+                    className: "text-start align-middle",
+                },
+                {
+                    data: 'payment_status',
+                    name: 'payment_status',
+                    title: 'Payment',
+                    orderable: false,
+                    className: "text-start align-middle",
+                },
+                {
+                    data: 'status',
+                    name: 'status',
+                    title: 'Void',
                     orderable: false,
                     className: "text-start align-middle",
                 },
@@ -42,7 +70,7 @@
                     className: "text-start align-middle",
                 },
             ]
-            table = $('#expense_category_dataTable').DataTable({
+            table = $('#supplier_dataTable').DataTable({
                 processing: true,
                 serverSide: true,
                 responsive: true,

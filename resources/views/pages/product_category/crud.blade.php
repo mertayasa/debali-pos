@@ -10,6 +10,7 @@
                     <div class="col">
                         {!! Form::label('name', 'Product Category Name', []) !!}
                         {!! Form::text('name', null, ['class' => 'form-control', 'id' => 'name', 'x-model' => '$store.product_category.productCategoryData.name']) !!}
+                        <small>Use coma separator (,) to insert multiple data</small>
                     </div>
                 </form>
             </div>

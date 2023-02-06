@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateExpensesTable extends Migration
+class CreateSuppliersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,12 @@ class CreateExpensesTable extends Migration
      */
     public function up()
     {
-        Schema::create('expenses', function (Blueprint $table) {
+        Schema::create('suppliers', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('expense_category_id');
-            $table->string('title');
-            $table->double('amount', 15, 2);
-            $table->text('description')->nullable();
-            $table->date('date');
+            $table->string('name', 150);
+            $table->string('phone', 20)->nullable();
             $table->enum('status', ['active', 'nonactive'])->default('active');
             $table->timestamps();
-
-            $table->foreign('expense_category_id')->references('id')->on('expense_categories');
         });
     }
 
@@ -34,6 +29,6 @@ class CreateExpensesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('expenses');
+        Schema::dropIfExists('suppliers');
     }
 }

@@ -1,22 +1,26 @@
 <!-- Modal -->
-<div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
+<div class="modal fade modal-lg" id="formModal" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="formModalLabel" x-text="$store.expense_category.state"></h5>
+                <h5 class="modal-title" id="formModalLabel" x-text="$store.supplier.state"></h5>
             </div>
             <div class="modal-body p-2">
-                <form action="" id="expenseCateForm" x-on:submit.prevent="$store.expense_category.crudAction($event)">
+                <form action="" id="supplierCateForm" x-on:submit.prevent="$store.supplier.crudAction($event)">
                     <div class="col">
-                        {!! Form::label('name', 'Expense Category Name', []) !!}
-                        {!! Form::text('name', null, ['class' => 'form-control', 'id' => 'name', 'x-model' => '$store.expense_category.expenseCategoryData.name']) !!}
-                        <small>Use coma separator (,) to insert multiple data</small>
+                        {!! Form::label('name', 'Supplier Name', []) !!}
+                        {!! Form::text('name', null, ['class' => 'form-control mb-2', 'id' => 'name', 'x-model' => '$store.supplier.supplierData.name']) !!}
+                    </div>
+
+                    <div class="col">
+                        {!! Form::label('phone', 'Supplier WA', []) !!}
+                        {!! Form::text('phone', null, ['class' => 'form-control mb-2', 'id' => 'phone', 'x-model' => '$store.supplier.supplierData.phone']) !!}
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" id="closeModalBtn" class="btn btn-sm btn-secondary" data-bs-dismiss="modal" x-on:click="$store.global.clearForm('expenseCateForm')">Close</button>
-                <button type="button" class="btn btn-sm btn-primary" x-on:click="$store.expense_category.crudAction(event)">Save</button>
+                <button type="button" id="closeModalBtn" class="btn btn-sm btn-secondary" data-bs-dismiss="modal" x-on:click="$store.global.clearForm('supplierCateForm')">Close</button>
+                <button type="button" class="btn btn-sm btn-primary" x-on:click="$store.supplier.crudAction(event)">Save</button>
             </div>
         </div>
     </div>
@@ -28,9 +32,10 @@
         const form = document.getElementById('createForm')
 
         document.addEventListener('alpine:init', () => {
-            Alpine.store('expense_category', {
-                expenseCategoryData: {},
-                storeUrl: "{{ route('expense_category.store') }}",
+            Alpine.store('supplier', {
+                supplierData: {},
+                supplierCategoryData: {},
+                storeUrl: "{{ route('supplier.store') }}",
                 updateUrl: '',
                 state: '',
                 crudAction(event){
@@ -40,7 +45,7 @@
                     this.state = 'Create Data'
                 },
                 store(event) {
-                    let formData = new FormData(document.getElementById('expenseCateForm'))
+                    let formData = new FormData(document.getElementById('supplierCateForm'))
                     clearFlash()
 
                     Swal.fire({
@@ -84,7 +89,7 @@
                         .then(data => {
                             Swal.close()
                             document.getElementById('closeModalBtn').click()
-                            $('#expense_category_dataTable').DataTable().ajax.reload()
+                            $('#supplier_dataTable').DataTable().ajax.reload()
                             Alpine.store('global').showFlash(data.message, 'success')
                         })
                         .catch((error) => {
@@ -127,7 +132,7 @@
                             })
                         })
                         .then(data => {
-                            this.expenseCategoryData = data.data
+                            this.supplierData = data.data
                             this.updateUrl = data.update_url
                         })
                         .catch((error) => {
@@ -137,7 +142,7 @@
                         })
                 }, 
                 update(event) {
-                    let formData = new FormData(document.getElementById('expenseCateForm'))
+                    let formData = new FormData(document.getElementById('supplierCateForm'))
                     formData.append('_method', 'PATCH')
                     clearFlash()
 
@@ -181,7 +186,7 @@
                         .then(data => {
                             Swal.close()
                             document.getElementById('closeModalBtn').click()
-                            $('#expense_category_dataTable').DataTable().ajax.reload()
+                            $('#supplier_dataTable').DataTable().ajax.reload()
 
                             Alpine.store('global').showFlash(data.message, 'success')
                         })
@@ -237,7 +242,7 @@
                                 })
                             })
                             .then(data => {
-                                $('#expense_category_dataTable').DataTable().ajax.reload()
+                                $('#supplier_dataTable').DataTable().ajax.reload()
         
                                 Alpine.store('global').showFlash(data.message, 'success')
                             })

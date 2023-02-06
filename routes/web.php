@@ -5,6 +5,8 @@ use App\Http\Controllers\ExpenseCategoryController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SaleController;
+use App\Http\Controllers\SupplierController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -82,8 +84,24 @@ Route::middleware(['auth'])->group(function () {
         Route::patch('set-status/{customer}/{status}', [CustomerController::class, 'setStatus'])->name('set_status');
     });
 
+    Route::group(['prefix' => 'supplier', 'as' => 'supplier.'], function () {
+        Route::get('/', [SupplierController::class, 'index'])->name('index');
+        Route::get('datatable', [SupplierController::class, 'datatable'])->name('datatable');
+        Route::post('store', [SupplierController::class, 'store'])->name('store');
+        Route::get('edit/{supplier}', [SupplierController::class, 'edit'])->name('edit');
+        Route::patch('update/{supplier}', [SupplierController::class, 'update'])->name('update');
+        Route::patch('set-status/{supplier}/{status}', [SupplierController::class, 'setStatus'])->name('set_status');
+    });
+
     Route::group(['prefix' => 'sale', 'as' => 'sale.'], function () {
-        Route::get('/', [CustomerController::class, 'index'])->name('index');
+        Route::get('/', [SaleController::class, 'index'])->name('index');
+        Route::get('datatable', [SaleController::class, 'datatable'])->name('datatable');
+        Route::get('create', [SaleController::class, 'create'])->name('create');
+        Route::post('store', [SaleController::class, 'store'])->name('store');
+        Route::get('edit/{sale}', [SaleController::class, 'edit'])->name('edit');
+        Route::patch('update/{sale}', [SaleController::class, 'update'])->name('update');
+        Route::patch('set-status/{sale}/{status}', [SaleController::class, 'setStatus'])->name('set_status');
+        Route::patch('set-payment-status/{sale}/{status}', [SaleController::class, 'setPaymentStatus'])->name('set_payment_status');
     });
 });
 

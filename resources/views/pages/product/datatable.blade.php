@@ -43,7 +43,7 @@
                 {
                     data: 'description',
                     name: 'description',
-                    title: 'Descripsi',
+                    title: 'Description',
                     orderable: false,
                     className: "text-start align-middle",
                 },
@@ -62,7 +62,7 @@
                 responsive: true,
                 ajax: url,
                 // searching: false,
-                // lengthChange: false,
+                lengthChange: false,
                 columns: columns,
                 order: [
                     [1, "DESC"]

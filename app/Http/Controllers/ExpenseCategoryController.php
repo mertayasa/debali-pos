@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\ExpenseCategoryDataTable;
+use App\Http\Requests\ExpenseCategoryRequest;
 use App\Models\ExpenseCategory;
 use Exception;
 use Illuminate\Http\Request;
@@ -21,10 +22,27 @@ class ExpenseCategoryController extends Controller
         return ExpenseCategoryDataTable::set($expense_categories);
     }
 
-    public function store(Request $request)
+    public function store(ExpenseCategoryRequest $request)
     {
         try{
-            ExpenseCategory::create($request->all());
+            if(str_contains($request->name, ',')){
+                $raw_names = explode(',', $request->name);
+                $names = [];
+
+                foreach ($raw_names as $key => $name) {
+                    if($name){
+                        array_push($names, [
+                            'name' => $name,
+                            'created_at' => now(),
+                            'updated_at' => now(),
+                        ]);
+                    }
+                }
+
+                ExpenseCategory::insert($names);
+            }else{
+                ExpenseCategory::create($request->validated());
+            }
         }catch(Exception $e){
             Log::error($e->getMessage());
             Log::error($e->getTraceAsString());
@@ -54,10 +72,10 @@ class ExpenseCategoryController extends Controller
         ]);
     }
 
-    public function update(Request $request, ExpenseCategory $expenseCategory)
+    public function update(ExpenseCategoryRequest $request, ExpenseCategory $expenseCategory)
     {
         try{
-            $expenseCategory->update($request->all());
+            $expenseCategory->update($request->validated());
         }catch(Exception $e){
             Log::error($e->getMessage());
             Log::error($e->getTraceAsString());
